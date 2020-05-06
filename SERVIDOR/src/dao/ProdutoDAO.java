@@ -24,6 +24,22 @@ public class ProdutoDAO {
         }    
     }
     
+    public static void excluir(int id){
+        String sql = "DELETE FROM produto WHERE id = ?";
+        
+        try{
+            Connection conexao = ConexaoDB.retornaConexao();
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.execute();
+            
+        }catch(Exception e){
+            System.err.println("Erro no Excluir Produto: "+e.toString());
+        } 
+        
+        
+    }
+    
     public static ArrayList<ProdutoBean> listar(){
         
         ArrayList<ProdutoBean> produtos = new ArrayList<>();
@@ -38,6 +54,7 @@ public class ProdutoDAO {
             while(registro.next()){
                
                 ProdutoBean temporario = new ProdutoBean();
+                temporario.setId(registro.getInt("id"));
                 temporario.setDescricao(registro.getString("descricao"));
                 temporario.setPreco(registro.getDouble("preco"));
                 temporario.setQuantidade(registro.getInt("quantidade"));               
@@ -55,5 +72,6 @@ public class ProdutoDAO {
     }      
     
     public void atualizar(){}
-    public void excluir(){}
+    
+    
 }

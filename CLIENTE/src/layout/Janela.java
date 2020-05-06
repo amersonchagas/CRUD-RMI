@@ -22,27 +22,18 @@ import views.listaProduto;
 
 public class Janela extends JFrame{    
     public JPanel menuTopo = new JPanel();  
-    public JPanel centro = new JPanel(); 
+    public static JPanel centro = new JPanel(); 
     
     public GridLayout layoutTopo = new GridLayout();
     public BorderLayout layoutJanela = new BorderLayout();   
     
-    public JButton botaoAdicionar = new JButton("Adicionar");
-    public JButton botaoListar = new JButton("Listar");
+    public JButton botaoProduto = new JButton("Produtos");
+    public JButton botaoCliente = new JButton("Clientes");
+    public JButton botaoFuncionario = new JButton("Funcionarios");
     
-  public Janela(){
-      botaoAdicionar.addActionListener( new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-             centro.removeAll();
-             centro.add( new adicionarProduto());
-             centro.repaint();
-             centro.validate();
-             
-          }
-      });
+  public Janela(){     
       
-      botaoListar.addActionListener( new ActionListener() {
+      botaoProduto.addActionListener( new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
               try {
@@ -51,16 +42,28 @@ public class Janela extends JFrame{
                   centro.repaint();
                   centro.validate();
               } catch (NotBoundException ex) {
-                  
+                  Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
               } catch (MalformedURLException ex) {
-                 
+                  Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
               }
+             
           }
       });
       
+      botaoCliente.addActionListener( new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) { }
+      });
+      
+      botaoFuncionario.addActionListener( new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) { }
+      });
+      
       menuTopo.setLayout(layoutTopo);
-      menuTopo.add(botaoAdicionar);
-      menuTopo.add(botaoListar);
+      menuTopo.add(botaoProduto);
+      menuTopo.add(botaoCliente);
+      menuTopo.add(botaoFuncionario);
             
       setLayout(layoutJanela);
       add(menuTopo, BorderLayout.NORTH);
