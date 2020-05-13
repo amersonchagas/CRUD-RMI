@@ -6,6 +6,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import interfaces.InterfaceProduto;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ProdutoBean extends UnicastRemoteObject implements InterfaceProduto{    
     private int id;
@@ -64,6 +66,9 @@ public class ProdutoBean extends UnicastRemoteObject implements InterfaceProduto
         ProdutoDAO.adicionar(this);
     }
     
+    
+    
+    
     @Override
     public void excluir(int id){
         ProdutoDAO.excluir(id);
@@ -72,6 +77,20 @@ public class ProdutoBean extends UnicastRemoteObject implements InterfaceProduto
     @Override
     public ArrayList<ProdutoBean> listar() throws RemoteException {
        return ProdutoDAO.listar();
+    }
+    
+    @Override
+    public void atualizar(){
+        ProdutoDAO.atualizar(this);
+    }    
+
+    @Override
+    public void pegaDadosProduto(int idproduto){
+        ProdutoBean produto = ProdutoDAO.pegaProduto(idproduto);
+        this.setId(produto.getId());
+        this.setDescricao(produto.getDescricao());
+        this.setPreco(produto.getPreco());
+        this.setQuantidade(produto.getQuantidade());
     }
     
    

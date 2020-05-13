@@ -20,10 +20,16 @@ public interface InterfaceProduto extends Remote{
     
     
     
-    public void adicionar() throws RemoteException;
+    public void adicionar() throws RemoteException; 
+    
+    public void atualizar() throws RemoteException;
+    
     public void excluir(int id) throws RemoteException;
     
     public ArrayList<ProdutoBean> listar() throws RemoteException;
+    
+    
+    public void pegaDadosProduto(int idproduto) throws RemoteException;
 
    
     

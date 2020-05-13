@@ -88,7 +88,7 @@ public class listaProduto extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
                   centro.removeAll();
-                  centro.add( new adicionarProduto());
+                  centro.add( new formularioProduto(0));
                   centro.repaint();
                   centro.validate();
         }
@@ -96,7 +96,21 @@ public class listaProduto extends JPanel {
 
     private static class BotaoEditarListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e) {}
+        public void actionPerformed(ActionEvent e) {
+            int registroSelecionado = tabela.getSelectedRow();
+            
+            if(registroSelecionado >= 0){
+                 int idProduto = Integer.parseInt(tabela.getValueAt(registroSelecionado, 0).toString());
+                 
+                  centro.removeAll();
+                  centro.add(new formularioProduto(idProduto));
+                  centro.repaint();
+                  centro.validate();
+                   
+            }else{
+                JOptionPane.showMessageDialog(null, "Selecione um Registro");
+            }
+        }
     }
     
     private static class BotaoExcluirListener implements ActionListener {
